@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,11 +8,11 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth');  // Ensures the user is authenticated
     }
 
-    public function index()
+    public function dashboard()
     {
-        return view('dashboard');
+        return view('user.dashboard');   // Your user dashboard view
     }
 }
