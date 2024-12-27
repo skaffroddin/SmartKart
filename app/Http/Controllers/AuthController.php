@@ -29,7 +29,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             // Redirect based on user role
-            if (Auth::user()->role === 'admin') {
+            if (Auth::user()->is_admin === 1) {
                 return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
             }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role' => 'user', // Set default role as 'user'
+            'is_admin' => 0, // Set default role as 'user'
         ]);
 
         return redirect()->route('login')->with('success', 'Account created successfully!');
@@ -97,14 +97,14 @@ class AuthController extends Controller
                 'email' => $user->getEmail(),
                 'google_id' => $user->getId(),
                 'avatar' => $user->getAvatar(),
-                'role' => 'user', // Default role for social login
+                'is_admin' => 0, // Default role for social login
             ]);
 
             Auth::login($newUser, true);
         }
 
         // Redirect based on user role
-        if (Auth::user()->role === 'admin') {
+        if (Auth::user()->is_admin === 1) {
             return redirect()->route('admin.dashboard');
         }
 
@@ -132,14 +132,14 @@ class AuthController extends Controller
                 'email' => $user->getEmail(),
                 'facebook_id' => $user->getId(),
                 'avatar' => $user->getAvatar(),
-                'role' => 'user', // Default role for social login
+                'is_admin' => 0, // Default role for social login
             ]);
 
             Auth::login($newUser, true);
         }
 
         // Redirect based on user role
-        if (Auth::user()->role === 'admin') {
+        if (Auth::user()->is_admin === 1) {
             return redirect()->route('admin.dashboard');
         }
 
@@ -167,14 +167,14 @@ class AuthController extends Controller
                 'email' => $user->getEmail(),
                 'github_id' => $user->getId(),
                 'avatar' => $user->getAvatar(),
-                'role' => 'user', // Default role for social login
+                'is_admin' => 0, // Default role for social login
             ]);
 
             Auth::login($newUser, true);
         }
 
         // Redirect based on user role
-        if (Auth::user()->role === 'admin') {
+        if (Auth::user()->is_admin === 1) {
             return redirect()->route('admin.dashboard');
         }
 
